@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native   # chạy Config Server với native profile
+  cloud:
+    config:
+      server:
+        native:
+          # đường dẫn trên Windows: bắt đầu bằng file:///
+          search-locations: file:///D:/JAVA_PROJECT_2025/ktpm/config-repo
+server:
+  port: 8888
