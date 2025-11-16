@@ -41,6 +41,41 @@
 					"response": []
 				},
 				{
+					"name": "get student by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/study/students/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"students",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "update student",
 					"request": {
 						"auth": {
@@ -339,7 +374,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"chapterId\": 1,\r\n  \"title\": \"Lesson 1 - Giới thiệu\",\r\n  \"resource\": \"https://link-to-video.com\",\r\n  \"image\": \"lesson1.png\",\r\n  \"position\": 1,\r\n  \"duration\": 30\r\n}\r\n",
+							"raw": "{\r\n  \"chapterId\": 1,\r\n  \"title\": \"Lesson 1 - Giới thiệu\",\r\n  \"resource\": {\r\n    \"link\": \"link\"\r\n  },\r\n  \"image\": \"lesson1.png\",\r\n  \"position\": 1,\r\n  \"duration\": 30\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -782,6 +817,41 @@
 								"api",
 								"study",
 								"instructors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get instructor by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/instructor/students/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"instructor",
+								"students",
 								"1"
 							]
 						}
