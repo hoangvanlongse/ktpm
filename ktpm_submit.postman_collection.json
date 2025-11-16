@@ -1,0 +1,416 @@
+{
+	"info": {
+		"_postman_id": "2b2ee297-6d3e-4ec5-8dd0-2421bf51ac33",
+		"name": "Submit Service API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39757495"
+	},
+	"item": [
+		{
+			"name": "Exam",
+			"item": [
+				{
+					"name": "Create Exam",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"referId\": \"course-01\",\n  \"instructorId\": \"instructor-001\",\n  \"title\": \"Java Basic Exam\",\n  \"description\": {\"text\": \"Java exam 2025\"},\n  \"duration\": 45,\n  \"beginTime\": \"2025-01-10T09:00:00\",\n  \"endTime\": \"2025-01-10T10:00:00\",\n  \"type\": \"QUIZ\",\n  \"publicYn\": \"Y\",\n  \"delYn\": \"N\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/api/submit/exam",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"submit",
+								"exam"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Exam",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"referId\": \"course-01\",\n  \"instructorId\": \"instructor-001\",\n  \"title\": \"Java Core Exam Updated\",\n  \"description\": {\"text\": \"Updated exam\"},\n  \"duration\": 60,\n  \"type\": \"TEST\",\n  \"publicYn\": \"Y\",\n  \"delYn\": \"N\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/api/submit/exam/{{examId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"submit",
+								"exam",
+								"{{examId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Exam",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/api/submit/exam/{{examId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"submit",
+								"exam",
+								"{{examId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Exam By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/api/submit/exam/{{examId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"submit",
+								"exam",
+								"{{examId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Exam",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/api/submit/exam/search?keyword=java&type=QUIZ",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"submit",
+								"exam",
+								"search"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "java"
+								},
+								{
+									"key": "type",
+									"value": "QUIZ"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Exams by Instructor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/api/submit/exam/instructor/{{instructorId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"submit",
+								"exam",
+								"instructor",
+								"{{instructorId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Question",
+			"item": [
+				{
+					"name": "Create Question",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"examId\": \"exam001\",\n  \"resource\": {\"text\": \"What is Java?\"},\n  \"listAnswer\": [\n    { \"answerId\": \"A1\", \"resource\": {\"text\": \"A programming language\"}, \"correctYn\": \"Y\" },\n    { \"answerId\": \"A2\", \"resource\": {\"text\": \"A coffee\"}, \"correctYn\": \"N\" }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/api/submit/question",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"submit",
+								"question"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Question",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"examId\": \"exam001\",\n  \"resource\": {\"text\": \"Updated question?\"}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/api/submit/question/{{questionId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"submit",
+								"question",
+								"{{questionId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Question",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/api/submit/question/{{questionId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"submit",
+								"question",
+								"{{questionId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Questions by Exam",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/api/submit/question/exam/{{examId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"submit",
+								"question",
+								"exam",
+								"{{examId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Student Exam",
+			"item": [
+				{
+					"name": "Submit Exam",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"examId\": \"exam001\",\n  \"studentId\": \"student001\",\n  \"submitResource\": {\"note\": \"Finished all questions\"},\n  \"listResult\": [\n    { \"questionId\": \"q1\", \"answerId\": \"A1\" },\n    { \"questionId\": \"q2\", \"answerId\": \"B3\" }\n  ],\n  \"grade\": 9.5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/api/submit/student-exam/submit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"submit",
+								"student-exam",
+								"submit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Student Results",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/api/submit/student-exam/student/{{studentId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"submit",
+								"student-exam",
+								"student",
+								"{{studentId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Submissions by Exam",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/api/submit/student-exam/exam/{{examId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"submit",
+								"student-exam",
+								"exam",
+								"{{examId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Submission by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/api/submit/student-exam/{{id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"submit",
+								"student-exam",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by studentid vs exam id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/api/submit/student-exam/student001/exam001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"api",
+								"submit",
+								"student-exam",
+								"student001",
+								"exam001"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
