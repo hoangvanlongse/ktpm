@@ -21,6 +21,33 @@ public class StudentProfileController {
     
     private final StudentProfileUseCase studentProfileUseCase;
     private final StudentMapper studentMapper;
+
+    /**
+     * API: Tạo học sinh mới
+     * GET /api/study/students/{studentId}
+     */
+    @GetMapping("/{studentId}")
+    public ResponseEntity<Map<String, Object>> getStudent(@PathVariable Long studentId) {
+        log.info("Fetching student with id: {}", studentId);
+        
+        try {
+            Student student = studentProfileUseCase.getById(studentId);
+            StudentDTO studentDTO = studentMapper.toDTO(student);
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Student fetched successfully");
+            response.put("student", studentDTO);
+            
+            return ResponseEntity.ok(response);
+        } catch (RuntimeException e) {
+            log.error("Error fetching student: {}", e.getMessage());
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("message", e.getMessage());
+            errorResponse.put("success", false);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        }
+        
+    }
     
     /**
      * API: Tạo học sinh mới

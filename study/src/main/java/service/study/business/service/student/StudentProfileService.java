@@ -15,7 +15,14 @@ import service.study.business.usecase.student.StudentProfileUseCase;
 public class StudentProfileService implements StudentProfileUseCase {
     
     private final StudentRepository studentRepository;
-    
+
+    @Override
+    public Student getById(Long studentId) {
+        log.info("Fetching student with id: {}", studentId);
+        return studentRepository.findById(studentId)
+                .orElseThrow(() -> new RuntimeException("Student not found with id: " + studentId));
+    }
+
     @Override
     public Long createStudent(Student student) {
         log.info("Creating new student: {}", student.getEmail());

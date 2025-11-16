@@ -21,6 +21,31 @@ public class InstructorProfileController {
     
     private final InstructorProfileUseCase instructorProfileUseCase;
     private final InstructorMapper instructorMapper;
+
+    /**
+     * API: Lấy thông tin người dạy theo ID
+     * GET /api/study/instructors/{instructorId}
+     */
+    @GetMapping("/{instructorId}")
+    public ResponseEntity<Map<String, Object>> getInstructor(@PathVariable Long instructorId) {
+        log.info("Fetching instructor with id: {}", instructorId);
+        try {
+            Instructor instructor = instructorProfileUseCase.getById(instructorId);
+            InstructorDTO instructorDTO = instructorMapper.toDTO(instructor);
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Instructor fetched successfully");
+            response.put("instructor", instructorDTO);
+            
+            return ResponseEntity.ok(response);
+        } catch (RuntimeException e) {
+            log.error("Error fetching instructor: {}", e.getMessage());
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("message", e.getMessage());
+            errorResponse.put("success", false);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        }
+    }
     
     /**
      * API: Tạo người dạy mới

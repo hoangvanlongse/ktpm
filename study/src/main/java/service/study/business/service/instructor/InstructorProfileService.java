@@ -17,6 +17,13 @@ public class InstructorProfileService implements InstructorProfileUseCase {
     private final InstructorRepository instructorRepository;
     
     @Override
+    public Instructor getById(Long instructorId) {
+        log.info("Fetching instructor with id: {}", instructorId);
+        return instructorRepository.findById(instructorId)
+                .orElseThrow(() -> new RuntimeException("Instructor not found with id: " + instructorId));
+    }
+    
+    @Override
     public Long createInstructor(Instructor instructor) {
         log.info("Creating new instructor: {}", instructor.getEmail());
         
