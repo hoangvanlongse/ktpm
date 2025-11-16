@@ -1,0 +1,902 @@
+{
+	"info": {
+		"_postman_id": "cfcd18ea-10cc-497f-aea8-24d21a9deba6",
+		"name": "ktpm_study",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39757495"
+	},
+	"item": [
+		{
+			"name": "student_profile",
+			"item": [
+				{
+					"name": "create student",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Nguyen Van A\",\r\n  \"email\": \"a@example.com\",\r\n  \"address\": \"Hanoi\",\r\n  \"sex\": \"male\",\r\n  \"phone\": \"0123456789\",\r\n  \"level\": \"beginner\",\r\n  \"birthday\": \"2000-05-12\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/study/students",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get student by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/study/students/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"students",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update student",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Nguyen Van A Updated\",\r\n  \"email\": \"a_new@example.com\",\r\n  \"address\": \"HCM\",\r\n  \"sex\": \"male\",\r\n  \"phone\": \"0999999999\",\r\n  \"level\": \"intermediate\",\r\n  \"birthday\": \"2000-05-12\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/study/students/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"students",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "manage_course",
+			"item": [
+				{
+					"name": "delete course",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/study/courses/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"courses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get course",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/study/courses/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"courses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update course",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"instructorId\": 1,\r\n  \"title\": \"Java Spring Boot - Updated\",\r\n  \"description\": \"Updated description\",\r\n  \"category\": \"Programming\",\r\n  \"price\": 399.0,\r\n  \"level\": \"Intermediate\",\r\n  \"status\": \"ACTIVE\",\r\n  \"image\": \"spring2.png\",\r\n  \"totalLesson\": 45,\r\n  \"totalDuration\": 140\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/study/courses/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"courses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create course",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"instructorId\": 1,\r\n  \"title\": \"Java Spring Boot Zero to Master\",\r\n  \"description\": \"Khóa học Spring Boot\",\r\n  \"category\": \"Programming\",\r\n  \"price\": 299.0,\r\n  \"level\": \"Beginner\",\r\n  \"status\": \"ACTIVE\",\r\n  \"image\": \"spring.png\",\r\n  \"totalLesson\": 0,\r\n  \"totalDuration\": 0\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/study/courses",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"courses"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "manage_chapter",
+			"item": [
+				{
+					"name": "get chapter",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/study/chapters/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"chapters",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete chapter",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/study/chapters/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"chapters",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create chapter",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"courseId\": 1,\r\n  \"title\": \"Chapter 1 - Giới thiệu\",\r\n  \"description\": \"Giới thiệu tổng quan về khóa học\",\r\n  \"position\": 1,\r\n  \"image\": \"chapter1.png\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/study/chapters",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"chapters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update chapter",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"courseId\": 1,\r\n  \"title\": \"Chapter 1 - Updated\",\r\n  \"description\": \"Cập nhật giới thiệu khóa học\",\r\n  \"position\": 1,\r\n  \"image\": \"chapter1_updated.png\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/study/chapters/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"chapters",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get chapters in course",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/study/chapters/course/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"chapters",
+								"course",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "manage_lesson",
+			"item": [
+				{
+					"name": "create lesson",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"chapterId\": 1,\r\n  \"title\": \"Lesson 1 - Giới thiệu\",\r\n  \"resource\": {\r\n    \"link\": \"link\"\r\n  },\r\n  \"image\": \"lesson1.png\",\r\n  \"position\": 1,\r\n  \"duration\": 30\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/study/lessons",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"lessons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get lessons in chapter",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/study/lessons/chapter/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"lessons",
+								"chapter",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get lesson",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/study/lessons/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"lessons",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete lesson",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/study/lessons/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"lessons",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update lesson",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"chapterId\": 1,\r\n  \"title\": \"Lesson 1 - Updated\",\r\n  \"resource\": \"https://link-to-updated-video.com\",\r\n  \"image\": \"lesson1_updated.png\",\r\n  \"position\": 1,\r\n  \"duration\": 35\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/study/lessons/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"lessons",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "study",
+			"item": [
+				{
+					"name": "search courses",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/study/courses?page=0&size=10",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"courses"
+							],
+							"query": [
+								{
+									"key": "instructorId",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "java",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "Programming",
+									"disabled": true
+								},
+								{
+									"key": "minPrice",
+									"value": "100",
+									"disabled": true
+								},
+								{
+									"key": "maxPrice",
+									"value": "500",
+									"disabled": true
+								},
+								{
+									"key": "level",
+									"value": "Beginner",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "ACTIVE",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "course progress",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/study/students/1/courses/1/progress",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"students",
+								"1",
+								"courses",
+								"1",
+								"progress"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "join leson",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/study/students/1/lessons/1/join",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"students",
+								"1",
+								"lessons",
+								"1",
+								"join"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "schedule",
+			"item": [
+				{
+					"name": "get registered course",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/study/schedules/1/courses",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"schedules",
+								"1",
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enrolle course",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"studentId\": 1,\r\n  \"courseId\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/study/schedules/1/enroll",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"schedules",
+								"1",
+								"enroll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search course",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/study/schedules/courses?page=0&size=10\n",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"schedules",
+								"courses"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "java",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "programming",
+									"disabled": true
+								},
+								{
+									"key": "minPrice",
+									"value": "100",
+									"disabled": true
+								},
+								{
+									"key": "maxPrice",
+									"value": "500",
+									"disabled": true
+								},
+								{
+									"key": "level",
+									"value": "beginner",
+									"disabled": true
+								},
+								{
+									"key": "instructorId",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10\n"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "instructor_profile",
+			"item": [
+				{
+					"name": "create instructor",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Nguyen Van A\",\r\n  \"email\": \"instructorA@gmail.com\",\r\n  \"address\": \"Hà Nội\",\r\n  \"sex\": \"Male\",\r\n  \"phone\": \"0123456789\",\r\n  \"degree\": \"Master\",\r\n  \"birthday\": \"1990-05-20\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/study/instructors",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"instructors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update instructor",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Nguyen Van A Updated\",\r\n  \"email\": \"newA@gmail.com\",\r\n  \"address\": \"HCM City\",\r\n  \"sex\": \"Male\",\r\n  \"phone\": \"0999999999\",\r\n  \"degree\": \"PhD\",\r\n  \"birthday\": \"1990-05-20\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/study/instructors/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"study",
+								"instructors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get instructor by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/instructor/students/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"instructor",
+								"students",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": ""
+		},
+		{
+			"key": "studyURL",
+			"value": ""
+		},
+		{
+			"key": "reportURL",
+			"value": ""
+		}
+	]
+}
