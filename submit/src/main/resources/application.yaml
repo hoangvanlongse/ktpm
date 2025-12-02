@@ -1,0 +1,35 @@
+# spring:
+#   application:
+#     name: submit
+#   config:
+#     import: "configserver:"
+#   cloud:
+#     config:
+#       uri: http://localhost:8888
+
+spring:
+  application:
+    name: submit
+
+  data:
+    mongodb:
+      uri: mongoURL connection string # todo
+      # host: localhost
+      # port: 27017
+      # database: ktpm_submit
+
+server:
+  port: 8083
+
+# eureka:
+#   client:
+#     serviceUrl:
+#       defaultZone: http://localhost:8761/eureka/
+#   instance:
+#     hostname: localhost
+#     preferIpAddress: false
+#     instanceId: ${spring.application.name}:${server.port}
+
+logging:
+  file:
+    name: path # todo
