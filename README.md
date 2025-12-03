@@ -18,11 +18,11 @@ Mục đích:
 ![Văn bản thay thế cho ảnh (alt text)](docs/img/source_code_view.png)
 
 ### Class Diagram
-[Module study](docs\img\module_study_class.drawio.png)
+[Module study](docs/img/module_study_class.drawio.png)
 
-[Module schedule](docs\img\module_schedule_class.drawio.png)
+[Module schedule](docs/img/module_schedule_class.drawio.png)
 ### Source code view
-[Source code view](docs\img\source_tree_call.png)
+[Source code view](docs/img/source_tree_call.png)
 
 
 ## Dự án & file chính
