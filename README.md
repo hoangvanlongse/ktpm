@@ -12,10 +12,10 @@ Mục đích:
 ### UI - FIGMA
 [Link Liên kết design figma](https://www.figma.com/design/hJtrpv48cxPbG0I4cgqIqq/-HK251--Software-Arch-Assignment?node-id=16-481&p=f&t=CkjQ8sMO0JPOyZPh-0)
 ### Tech-Stack Diagram 
-![Văn bản thay thế cho ảnh (alt text)](docs\img\Diagram_DEPLOYMENT.drawio.png)
+![Văn bản thay thế cho ảnh (alt text)](docs/img/Diagram_DEPLOYMENT.drawio.png)
 ### Source tree call (SOLID)
-![Văn bản thay thế cho ảnh (alt text)](docs\img\source_tree_call.png)
-![Văn bản thay thế cho ảnh (alt text)](docs\img\source_code_view.png)
+![Văn bản thay thế cho ảnh (alt text)](docs/img/source_tree_call.png)
+![Văn bản thay thế cho ảnh (alt text)](docs/img/source_code_view.png)
 
 ### Class Diagram
 [Module study](docs\img\module_study_class.drawio.png)
