@@ -1,0 +1,14 @@
+{
+    "properties": [
+        {
+            "name": "study.service.ip",
+            "type": "java.lang.String",
+            "description": "IP of the server running Study Service"
+        },
+        {
+            "name": "submit.service.ip",
+            "type": "java.lang.String",
+            "description": "IP of the server running Submit Service"
+        }
+    ]
+}

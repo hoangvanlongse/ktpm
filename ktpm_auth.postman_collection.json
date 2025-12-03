@@ -1,0 +1,82 @@
+{
+	"info": {
+		"_postman_id": "20491c38-dd16-4a7c-930e-1e075fceecdf",
+		"name": "ktpm_auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "39000944"
+	},
+	"item": [
+		{
+			"name": "addNewUser - add Student",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"khoi\",\n    \"password\": \"123\",\n    \"email\": \"khoi-student@gmail.com\",\n    \"roles\": \"STUDENT\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8083/api/auth/addNewUser"
+			},
+			"response": []
+		},
+		{
+			"name": "addNewUser - add Teacher",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"khoi-teacher\",\n    \"password\": \"123\",\n    \"email\": \"khoi-teacher@gmail.com\",\n    \"roles\": \"TEACHER\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8083/api/auth/addNewUser"
+			},
+			"response": []
+		},
+		{
+			"name": "login - khoi-student",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"khoi-student@gmail.com\",\n    \"password\": \"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8083/api/auth/login"
+			},
+			"response": []
+		},
+		{
+			"name": "login - khoi-teacher",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"khoi-teacher@gmail.com\",\n    \"password\": \"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8083/api/auth/login"
+			},
+			"response": []
+		}
+	]
+}
