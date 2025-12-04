@@ -13,13 +13,13 @@ spring:
 
   data:
     mongodb:
-      uri: mongodb://admin:khoicktv@192.168.0.148:27017/?authSource=admin
-      host: 192.168.0.148
-      port: 27017
-      database: ktpm_submit
+      uri: mongoURL connection string # todo
+      # host: localhost
+      # port: 27017
+      # database: ktpm_submit
 
 server:
-  port: 8082
+  port: 8083
 
 # eureka:
 #   client:
@@ -32,4 +32,4 @@ server:
 
 logging:
   file:
-    name: /home/khoitrananh/Documents/hcmut/hk251/co3017/be-assignment/log/submit-log-20251202.log
+    name: path # todo

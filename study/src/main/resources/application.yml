@@ -18,14 +18,14 @@ spring:
     name: study
 
   datasource:
-    url: jdbc:postgresql://192.168.0.148:5432/ktpm_study # todo change db name
-    username: khoidev # todo change username
-    password: khoicktv # todo change password
+    url: jdbc:postgresql://localhost:5432/ktpm_study  # todo change db name
+    username:                                 # todo change username
+    password:                                 # todo change password
     driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
-      ddl-auto: update # none | validate | update | create | create-drop
+      ddl-auto: update   # none | validate | update | create | create-drop
     properties:
       hibernate:
         format_sql: true
