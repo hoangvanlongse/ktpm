@@ -9,7 +9,8 @@ import org.springframework.stereotype.Component;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Component
-public class AuthorizationService {
+public class AuthorizationService implements IAuthorizationService {
+    @Override
     public boolean canAccess(HttpServletRequest req) {
         // POST /api/study/students, anyone
         // POST /api/study/instructors, anyone
@@ -33,6 +34,7 @@ public class AuthorizationService {
         return false;
     }
 
+    @Override
     public boolean canAccess(String userRoles, String path, HttpMethod reqMethod) {
 
         if (!"STUDENT".equals(userRoles) && !"TEACHER".equals(userRoles))
