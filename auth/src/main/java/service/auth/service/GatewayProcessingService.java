@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import service.auth.config.IGatewayRouteConfig;
 
 @Service
-public class GatewayProcessingService {
+public class GatewayProcessingService implements IGatewayProcessingService {
 
     private final IJwtService jwtService;
     private final UserDetailsService userDetailsService;
@@ -37,6 +37,7 @@ public class GatewayProcessingService {
         this.authorizationService = authorizationService;
     }
 
+    @Override
     public ResponseEntity<?> processRequest(HttpServletRequest req) {
         String path = req.getRequestURI();
 

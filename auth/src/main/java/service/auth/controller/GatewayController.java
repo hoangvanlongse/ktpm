@@ -5,15 +5,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpServletRequest;
-import service.auth.service.GatewayProcessingService;
+import service.auth.service.IGatewayProcessingService;
 
 @RestController
 public class GatewayController {
 
-    private final GatewayProcessingService gatewayProcessingService;
+    private final IGatewayProcessingService gatewayProcessingService;
 
     // Use Constructor Injection (DIP)
-    public GatewayController(GatewayProcessingService gatewayProcessingService) {
+    public GatewayController(IGatewayProcessingService gatewayProcessingService) {
         this.gatewayProcessingService = gatewayProcessingService;
     }
 
