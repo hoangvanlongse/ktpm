@@ -1,8 +1,9 @@
 package service.auth.service;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
@@ -10,24 +11,30 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Component
 public class AuthorizationService implements IAuthorizationService {
+
+    private final Map<String, HttpMethod> publicPaths;
+    private final Map<String, Set<HttpMethod>> studentOrTeacherPaths;
+    private final Map<String, Set<HttpMethod>> studentOnlyPaths;
+    private final Map<String, Set<HttpMethod>> teacherOnlyPaths;
+
+    public AuthorizationService(
+            @Qualifier("publicPaths") Map<String, HttpMethod> publicPaths,
+            @Qualifier("studentOrTeacherPaths") Map<String, Set<HttpMethod>> studentOrTeacherPaths,
+            @Qualifier("studentOnlyPaths") Map<String, Set<HttpMethod>> studentOnlyPaths,
+            @Qualifier("teacherOnlyPaths") Map<String, Set<HttpMethod>> teacherOnlyPaths) {
+        this.publicPaths = publicPaths;
+        this.studentOrTeacherPaths = studentOrTeacherPaths;
+        this.studentOnlyPaths = studentOnlyPaths;
+        this.teacherOnlyPaths = teacherOnlyPaths;
+    }
+
     @Override
     public boolean canAccess(HttpServletRequest req) {
-        // POST /api/study/students, anyone
-        // POST /api/study/instructors, anyone
-        // GET /api/study/courses, anyone
-        // GET /api/study/schedules/courses, anyone
-        HashMap<String, HttpMethod> publicPaths = new HashMap<>();
-
-        publicPaths.put("/api/study/courses", HttpMethod.GET);
-        publicPaths.put("/api/study/schedules/courses", HttpMethod.GET);
-        publicPaths.put("/api/study/students", HttpMethod.POST);
-        publicPaths.put("/api/study/instructors", HttpMethod.POST);
-
         String path = req.getRequestURI();
         HttpMethod reqMethod = HttpMethod.valueOf(req.getMethod());
 
-        for (String publicPath : publicPaths.keySet()) {
-            if (path.startsWith(publicPath) && reqMethod.equals(publicPaths.get(publicPath)))
+        for (Map.Entry<String, HttpMethod> entry : publicPaths.entrySet()) {
+            if (path.startsWith(entry.getKey()) && reqMethod.equals(entry.getValue()))
                 return true;
         }
 
@@ -40,79 +47,24 @@ public class AuthorizationService implements IAuthorizationService {
         if (!"STUDENT".equals(userRoles) && !"TEACHER".equals(userRoles))
             return false;
 
-        // GET /api/submit/student-exam, student, teacher
-        // GET /api/submit/question/exam, teacher, student
-        // GET /api/study/chapters/course", student, teacher
-        // GET /api/study/lessons, student, teacher
-        // PUT /api/study/students", teacher, student
-        // GET /api/study/students", teacher, student
-        HashMap<String, Set<HttpMethod>> studentOrTeacherPaths = new HashMap<>();
-        studentOrTeacherPaths.put("/api/submit/student-exam", Set.of(HttpMethod.GET));
-        studentOrTeacherPaths.put("/api/submit/question/exam", Set.of(HttpMethod.GET));
-        studentOrTeacherPaths.put("/api/study/chapters/course", Set.of(HttpMethod.GET));
-        studentOrTeacherPaths.put("/api/study/lessons", Set.of(HttpMethod.GET));
-        studentOrTeacherPaths.put("/api/submit/exam/instructor", Set.of(HttpMethod.GET));
-        studentOrTeacherPaths.put("/api/study/students", Set.of(HttpMethod.GET, HttpMethod.PUT));
-
-        for (String curPath : studentOrTeacherPaths.keySet()) {
-            if (path.startsWith(curPath) && studentOrTeacherPaths.get(curPath).contains(reqMethod))
+        // Check paths accessible by both Student and Teacher
+        for (Map.Entry<String, Set<HttpMethod>> entry : studentOrTeacherPaths.entrySet()) {
+            if (path.startsWith(entry.getKey()) && entry.getValue().contains(reqMethod))
                 return true;
         }
 
+        // Check paths accessible only by Student
         if ("STUDENT".equals(userRoles)) {
-            // GET /api/study/students/, student
-            // GET /api/study/schedules, student
-            // GET /api/submit/exam, student
-            // POST /api/study/students, student
-            // POST /api/study/schedules, student
-            // POST /api/submit/student-exam, student
-            HashMap<String, Set<HttpMethod>> studentOnlyPaths = new HashMap<>();
-            studentOnlyPaths.put("/api/study/students/", Set.of(HttpMethod.GET));
-            studentOnlyPaths.put("/api/study/students", Set.of(HttpMethod.POST));
-            studentOnlyPaths.put("/api/study/schedules", Set.of(HttpMethod.GET, HttpMethod.POST));
-            studentOnlyPaths.put("/api/submit/exam", Set.of(HttpMethod.GET));
-            studentOnlyPaths.put("/api/submit/student-exam", Set.of(HttpMethod.POST));
-
-            for (String curPath : studentOnlyPaths.keySet()) {
-                if (path.startsWith(curPath) && studentOnlyPaths.get(curPath).contains(reqMethod))
+            for (Map.Entry<String, Set<HttpMethod>> entry : studentOnlyPaths.entrySet()) {
+                if (path.startsWith(entry.getKey()) && entry.getValue().contains(reqMethod))
                     return true;
             }
         }
 
+        // Check paths accessible only by Teacher
         if ("TEACHER".equals(userRoles)) {
-            // GET /api/study/chapters, teacher
-            // POST /api/study/courses, teacher
-            // POST /api/study/chapters, teacher
-            // POST /api/study/lessons, teacher
-            // POST /api/submit/exam, teacher
-            // POST /api/submit/question, teacher
-            // PUT /api/study/courses, teacher
-            // PUT /api/study/chapters, teacher
-            // PUT /api/submit/question, teacher
-            // PUT /api/study/lessons, teacher
-            // PUT /api/study/instructors, teacher
-            // PUT /api/submit/exam, teacher
-            // DEL /api/study/lessons, teacher
-            // DEL /api/study/chapters, teacher
-            // DEL /api/submit/exam, teacher
-            // DEL /api/study/courses, teacher
-            // DEL /api/submit/question, teacher
-            HashMap<String, Set<HttpMethod>> teacherOnlyPaths = new HashMap<>();
-            teacherOnlyPaths.put("/api/study/chapters", Set.of(HttpMethod.GET, HttpMethod.POST, HttpMethod.PUT,
-                    HttpMethod.DELETE));
-            teacherOnlyPaths.put("/api/study/courses", Set.of(HttpMethod.POST, HttpMethod.PUT,
-                    HttpMethod.DELETE));
-            teacherOnlyPaths.put("/api/study/lessons", Set.of(HttpMethod.POST, HttpMethod.PUT,
-                    HttpMethod.DELETE));
-            teacherOnlyPaths.put("/api/submit/exam", Set.of(HttpMethod.POST, HttpMethod.PUT,
-                    HttpMethod.DELETE));
-            teacherOnlyPaths.put("/api/submit/question", Set.of(HttpMethod.POST, HttpMethod.PUT,
-                    HttpMethod.DELETE));
-            teacherOnlyPaths.put("/api/study/instructors", Set.of(HttpMethod.PUT));
-
-            for (String curPath : teacherOnlyPaths.keySet()) {
-                // System.out.println(curPath + '\n' + teacherOnlyPaths.get(curPath));
-                if (path.startsWith(curPath) && teacherOnlyPaths.get(curPath).contains(reqMethod))
+            for (Map.Entry<String, Set<HttpMethod>> entry : teacherOnlyPaths.entrySet()) {
+                if (path.startsWith(entry.getKey()) && entry.getValue().contains(reqMethod))
                     return true;
             }
         }
