@@ -1,0 +1,49 @@
+2025-12-06T00:02:28.942+07:00  INFO 39011 --- [study] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-06T00:02:28.957+07:00  INFO 39011 --- [study] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-12-06T00:02:28.967+07:00  INFO 39011 --- [study] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-06T00:02:28.978+07:00  INFO 39011 --- [study] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-12-06T00:02:28.984+07:00  INFO 39011 --- [study] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-12-06T00:13:20.048+07:00  INFO 103919 --- [study] [restartedMain] service.study.StudyApplication           : Starting StudyApplication using Java 25.0.1 with PID 103919 (/home/khoitrananh/Documents/hcmut/hk251/co3017/be-assignment/study/target/classes started by khoitrananh in /home/khoitrananh/Documents/hcmut/hk251/co3017/be-assignment/study)
+2025-12-06T00:13:20.049+07:00  INFO 103919 --- [study] [restartedMain] service.study.StudyApplication           : No active profile set, falling back to 1 default profile: "default"
+2025-12-06T00:13:20.081+07:00  INFO 103919 --- [study] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-12-06T00:13:20.082+07:00  INFO 103919 --- [study] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-12-06T00:13:20.495+07:00  INFO 103919 --- [study] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-06T00:13:20.545+07:00  INFO 103919 --- [study] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 40 ms. Found 8 JPA repository interfaces.
+2025-12-06T00:13:20.838+07:00  INFO 103919 --- [study] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2025-12-06T00:13:20.847+07:00  INFO 103919 --- [study] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-06T00:13:20.848+07:00  INFO 103919 --- [study] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.48]
+2025-12-06T00:13:20.866+07:00  INFO 103919 --- [study] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-12-06T00:13:20.866+07:00  INFO 103919 --- [study] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 784 ms
+2025-12-06T00:13:20.977+07:00  INFO 103919 --- [study] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-06T00:13:21.020+07:00  INFO 103919 --- [study] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.33.Final
+2025-12-06T00:13:21.042+07:00  INFO 103919 --- [study] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-12-06T00:13:21.223+07:00  INFO 103919 --- [study] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-06T00:13:21.242+07:00  INFO 103919 --- [study] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-12-06T00:13:21.631+07:00  INFO 103919 --- [study] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@f329433
+2025-12-06T00:13:21.633+07:00  INFO 103919 --- [study] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-12-06T00:13:21.781+07:00  INFO 103919 --- [study] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.11
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-06T00:13:21.963+07:00  WARN 103919 --- [study] [restartedMain] org.hibernate.mapping.RootClass          : HHH000038: Composite-id class does not override equals(): service.study.access.entity.StudentLesson$StudentLessonId
+2025-12-06T00:13:21.963+07:00  WARN 103919 --- [study] [restartedMain] org.hibernate.mapping.RootClass          : HHH000039: Composite-id class does not override hashCode(): service.study.access.entity.StudentLesson$StudentLessonId
+2025-12-06T00:13:22.385+07:00  INFO 103919 --- [study] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-06T00:13:23.164+07:00  INFO 103919 --- [study] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-06T00:13:23.431+07:00  INFO 103919 --- [study] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-06T00:13:23.556+07:00  WARN 103919 --- [study] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-06T00:13:23.768+07:00  INFO 103919 --- [study] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-12-06T00:13:23.783+07:00  INFO 103919 --- [study] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2025-12-06T00:13:23.788+07:00  INFO 103919 --- [study] [restartedMain] service.study.StudyApplication           : Started StudyApplication in 4.065 seconds (process running for 4.342)
+2025-12-06T00:14:41.524+07:00  INFO 103919 --- [study] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-06T00:14:41.524+07:00  INFO 103919 --- [study] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-12-06T00:14:41.525+07:00  INFO 103919 --- [study] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-12-06T00:14:41.595+07:00  INFO 103919 --- [study] [http-nio-8081-exec-1] s.s.p.c.InstructorProfileController      : Creating new instructor: khoi-teacher@gmail.com
+2025-12-06T00:14:41.609+07:00  INFO 103919 --- [study] [http-nio-8081-exec-1] s.s.b.s.i.InstructorProfileService       : Creating new instructor: khoi-teacher@gmail.com
+2025-12-06T00:14:41.751+07:00  INFO 103919 --- [study] [http-nio-8081-exec-1] s.s.b.s.i.InstructorProfileService       : Successfully created instructor with id: 6
+2025-12-06T00:14:46.473+07:00  INFO 103919 --- [study] [http-nio-8081-exec-2] s.s.p.c.StudentProfileController         : Creating new student: khoi-student@gmail.com
+2025-12-06T00:14:46.489+07:00  INFO 103919 --- [study] [http-nio-8081-exec-2] s.s.b.s.student.StudentProfileService    : Creating new student: khoi-student@gmail.com
+2025-12-06T00:14:46.524+07:00  INFO 103919 --- [study] [http-nio-8081-exec-2] s.s.b.s.student.StudentProfileService    : Successfully created student with id: 9

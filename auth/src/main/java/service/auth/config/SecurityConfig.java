@@ -1,6 +1,5 @@
 package service.auth.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -16,17 +15,24 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import service.auth.filter.JwtAuthFilter;
-import service.auth.service.JwtService;
+import service.auth.service.IJwtService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+    // Using final fields and constructor injection (DIP)
+    private final UserDetailsService userDetailsService;
+    private final PasswordEncoder passwordEncoder;
+    private final IJwtService jwtService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    // Constructor injection for required dependencies
+    public SecurityConfig(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder,
+            IJwtService jwtService) {
+        this.userDetailsService = userDetailsService;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
+    }
 
     // Constructor injection for required dependencies
     // public SecurityConfig(UserDetailsService userDetailsService) {
@@ -38,7 +44,7 @@ public class SecurityConfig {
      * Defines endpoint access rules and JWT filter setup
      */
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 // Disable CSRF (not needed for stateless JWT)
                 .csrf(csrf -> csrf.disable())
@@ -47,7 +53,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Public endpoints
                         .requestMatchers("/api/auth/welcome", "/api/auth/addNewUser", "/api/auth/generateToken",
-                                "/api/auth/login", "/api/study/**")
+                                "/api/auth/login", "/api/study/**", "/api/submit/**")
                         .permitAll()
 
                         // All other endpoints require authentication
@@ -60,7 +66,7 @@ public class SecurityConfig {
                 .authenticationProvider(authenticationProvider())
 
                 // Add JWT filter before Spring Security's default filter
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
@@ -96,7 +102,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public JwtAuthFilter jwtAuthFilter(UserDetailsService userDetailsService, JwtService jwtService) {
+    public JwtAuthFilter jwtAuthFilter() {
         return new JwtAuthFilter(userDetailsService, jwtService);
     }
 }

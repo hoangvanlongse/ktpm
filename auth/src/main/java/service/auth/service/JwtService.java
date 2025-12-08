@@ -22,18 +22,20 @@ import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.SignatureException;
 
 @Component
-public class JwtService {
+public class JwtService implements IJwtService {
 
     public static final String SECRET = "eyV/h2wsob5ZqKHAm0/0ppH+0+WFQJBN17qyxYmKCVE=";
 
     public static final byte[] BASE64_ENCODED_SECRECT = Base64.getEncoder().encode(SECRET.getBytes());
 
+    @Override
     public String generateToken(String email, String roles) { // Use email as username
         Map<String, Object> claims = new HashMap<>();
         claims.put("roles", roles);
         return createToken(claims, email);
     }
 
+    @Override
     public String generateToken(String email) { // Use email as username
         return generateToken(email, "STUDENT");
     }
@@ -53,14 +55,17 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
+    @Override
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
+    @Override
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
 
+    @Override
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
 
@@ -70,6 +75,7 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
+    @Override
     public Claims extractAllClaims(String token) {
         try {
             Claims claims = Jwts.parserBuilder()
@@ -89,6 +95,7 @@ public class JwtService {
         return extractExpiration(token).before(new Date());
     }
 
+    @Override
     public Boolean validateToken(String token, UserDetails userDetails) {
         try {
             // Verify that the token is valid

@@ -15,14 +15,15 @@ import java.io.IOException;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import service.auth.service.JwtService;
+import service.auth.service.IJwtService;
+// import service.auth.service.JwtService;
 
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final UserDetailsService userDetailsService;
-    private final JwtService jwtService;
+    private final IJwtService jwtService;
 
-    public JwtAuthFilter(UserDetailsService userDetailsService, JwtService jwtService) {
+    public JwtAuthFilter(UserDetailsService userDetailsService, IJwtService jwtService) {
         this.userDetailsService = userDetailsService;
         this.jwtService = jwtService;
     }
