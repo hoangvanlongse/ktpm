@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import service.auth.entity.AuthRequest;
 import service.auth.entity.UserRegistrationRequest;
-import service.auth.service.IUserInfoService;
 import service.auth.service.IJwtService;
+import service.auth.service.IUserInfoService;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -76,9 +76,13 @@ public class UserController {
 
         HashMap<String, String> resBody = new HashMap<>();
         if (authentication.isAuthenticated()) {
+            String userName = userInfoService.getUserName(authRequest.getUsername());
             String userRole = userInfoService.getUserAuthorities(authRequest.getUsername()); // Uses IUserInfoService
-
+            Long userStudyId = userInfoService.getUserStudyId(authRequest.getUsername());
             resBody.put("success", "true");
+            resBody.put("userName", userName);
+            resBody.put("userStudyId", userStudyId.toString());
+            resBody.put("userRole", userRole);
             resBody.put("token", jwtService.generateToken(authRequest.getUsername(), userRole)); // Uses IJwtService
             return ResponseEntity.status(HttpStatus.OK).body(resBody);
         } else {
