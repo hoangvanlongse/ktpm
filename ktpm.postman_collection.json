@@ -1,0 +1,297 @@
+{
+	"info": {
+		"_postman_id": "bf309e69-4f5d-41d8-bdce-064fa51cedda",
+		"name": "ktpm",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "39000944"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "addNewUser - add Student",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"khoi-student\",\n  \"email\": \"khoi-student@gmail.com\",\n  \"password\": \"123\",\n  \"roles\": \"STUDENT\",\n  \"address\": \"Hà Nội\",\n  \"sex\": \"Male\",\n  \"phone\": \"0123456789\",\n  \"degree\": \"Master\",\n  \"birthday\": \"1990-05-20\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://{{gateway-url}}/api/auth/addNewUser"
+					},
+					"response": []
+				},
+				{
+					"name": "addNewUser - add Teacher",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"khoi-teacher\",\n  \"email\": \"khoi-teacher@gmail.com\",\n  \"password\": \"123\",\n  \"roles\": \"TEACHER\",\n  \"address\": \"Hà Nội\",\n  \"sex\": \"Male\",\n  \"phone\": \"0123456789\",\n  \"degree\": \"Master\",\n  \"birthday\": \"1990-05-20\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://{{gateway-url}}/api/auth/addNewUser"
+					},
+					"response": []
+				},
+				{
+					"name": "login - khoi-student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let res = pm.response.json();",
+									"",
+									"if (res && res.token) {",
+									"    pm.collectionVariables.set(\"student-auth-token\", res.token);",
+									"    console.log(\"Token stored:\", res.token);",
+									"} else {",
+									"    console.log(\"No token found in response!\");",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"khoi-student@gmail.com\",\n    \"password\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://{{gateway-url}}/api/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "login - khoi-teacher",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let res = pm.response.json();",
+									"",
+									"if (res && res.token) {",
+									"    pm.collectionVariables.set(\"teacher-auth-token\", res.token);",
+									"    console.log(\"Token stored:\", res.token);",
+									"} else {",
+									"    console.log(\"No token found in response!\");",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"khoi-teacher@gmail.com\",\n    \"password\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://{{gateway-url}}/api/auth/login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "study",
+			"item": [
+				{
+					"name": "profile-student",
+					"item": [
+						{
+							"name": "get student by id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{student-auth-token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{gateway-url}}/api/study/students/1"
+							},
+							"response": []
+						},
+						{
+							"name": "update student",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{student-auth-token}}"
+									}
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Nguyen Van A Updated\",\r\n  \"email\": \"a_new@example.com\",\r\n  \"address\": \"HCM\",\r\n  \"sex\": \"male\",\r\n  \"phone\": \"0999999999\",\r\n  \"level\": \"intermediate\",\r\n  \"birthday\": \"2000-05-12\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{gateway-url}}/api/study/students/1"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "profile-teacher",
+					"item": [
+						{
+							"name": "get instructor by id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{teacher-auth-token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{gateway-url}}/api/study/instructors/1"
+							},
+							"response": []
+						},
+						{
+							"name": "update instructor",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{teacher-auth-token}}"
+									}
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Nguyen Van A Updated\",\r\n  \"email\": \"newA@gmail.com\",\r\n  \"address\": \"HCM City\",\r\n  \"sex\": \"Male\",\r\n  \"phone\": \"0999999999\",\r\n  \"degree\": \"PhD\",\r\n  \"birthday\": \"1990-05-20\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{gateway-url}}/api/study/instructors/1"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "submit",
+			"item": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "teacher-auth-token",
+			"value": ""
+		},
+		{
+			"key": "student-auth-token",
+			"value": ""
+		},
+		{
+			"key": "gateway-url",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "exam-id",
+			"value": ""
+		},
+		{
+			"key": "question-id",
+			"value": ""
+		}
+	]
+}

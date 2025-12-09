@@ -2,7 +2,6 @@ package service.auth.controller;
 
 import java.util.HashMap;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,25 +13,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.RequiredArgsConstructor;
 import service.auth.entity.AuthRequest;
-import service.auth.entity.UserInfo;
-import service.auth.service.JwtService;
-import service.auth.service.UserInfoService;
+import service.auth.entity.UserRegistrationRequest;
+import service.auth.service.IJwtService;
+import service.auth.service.IUserInfoService;
 
 @RestController
 @RequestMapping("/api/auth")
-@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserInfoService service;
+    // Using interfaces and final fields (DIP/Constructor Injection)
+    private final IUserInfoService userInfoService;
+    private final IJwtService jwtService;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private JwtService jwtService;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    // Constructor Injection replaces @Autowired fields
+    public UserController(IUserInfoService userInfoService, IJwtService jwtService,
+            AuthenticationManager authenticationManager) {
+        this.userInfoService = userInfoService;
+        this.jwtService = jwtService;
+        this.authenticationManager = authenticationManager;
+    }
+    // ... rest of the class methods remain the same, using userInfoService and
+    // jwtService
+    // ...
 
     @GetMapping("/welcome")
     public String welcome() {
@@ -40,8 +44,8 @@ public class UserController {
     }
 
     @PostMapping("/addNewUser")
-    public ResponseEntity<?> addNewUser(@RequestBody UserInfo userInfo) {
-        String addNewUserstatus = service.addUser(userInfo);
+    public ResponseEntity<?> addNewUser(@RequestBody UserRegistrationRequest userRegistrationRequest) {
+        String addNewUserstatus = userInfoService.addUser(userRegistrationRequest); // Uses IUserInfoService
 
         HashMap<String, String> resBody = new HashMap<>();
 
@@ -51,9 +55,11 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(resBody);
         }
 
-        if ("failed".equals(addNewUserstatus)) {
+        if (addNewUserstatus.startsWith("failed:")) {
+            String errorMessage = addNewUserstatus.substring("failed:".length());
             resBody.put("success", "false");
-            resBody.put("message", "Internal error");
+            resBody.put("message", "User creation failed: " + errorMessage);
+            // Use INTERNAL_SERVER_ERROR or BAD_REQUEST depending on the root cause
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(resBody);
         }
 
@@ -70,10 +76,14 @@ public class UserController {
 
         HashMap<String, String> resBody = new HashMap<>();
         if (authentication.isAuthenticated()) {
-            String userRole = service.getUserAuthorities(authRequest.getUsername());
-
+            String userName = userInfoService.getUserName(authRequest.getUsername());
+            String userRole = userInfoService.getUserAuthorities(authRequest.getUsername()); // Uses IUserInfoService
+            Long userStudyId = userInfoService.getUserStudyId(authRequest.getUsername());
             resBody.put("success", "true");
-            resBody.put("token", jwtService.generateToken(authRequest.getUsername(), userRole));
+            resBody.put("userName", userName);
+            resBody.put("userStudyId", userStudyId.toString());
+            resBody.put("userRole", userRole);
+            resBody.put("token", jwtService.generateToken(authRequest.getUsername(), userRole)); // Uses IJwtService
             return ResponseEntity.status(HttpStatus.OK).body(resBody);
         } else {
             resBody.put("success", "fail");
@@ -81,17 +91,4 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(resBody);
         }
     }
-
-    // @PostMapping("/generateToken")
-    // public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
-    // Authentication authentication = authenticationManager.authenticate(
-    // new UsernamePasswordAuthenticationToken(authRequest.getUsername(),
-    // authRequest.getPassword()));
-    // if (authentication.isAuthenticated()) {
-
-    // return jwtService.generateToken(authRequest.getUsername());
-    // } else {
-    // throw new UsernameNotFoundException("Invalid user request!");
-    // }
-    // }
 }

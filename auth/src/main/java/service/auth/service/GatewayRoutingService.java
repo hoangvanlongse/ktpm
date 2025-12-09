@@ -15,10 +15,11 @@ import org.springframework.web.client.RestTemplate;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Component
-public class GatewayRoutingService {
+public class GatewayRoutingService implements IGatewayRoutingService {
 
     // private final WebClient
 
+    @Override
     public ResponseEntity<?> forwardRequest(HttpServletRequest req, String address) {
         try {
             String url = address + req.getRequestURI();
